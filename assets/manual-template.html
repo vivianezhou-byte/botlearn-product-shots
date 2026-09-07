@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>AI 领导力 · 上手指南</title>
+<style>
+:root{
+  --bg:#f5f5f7; --surface-1:#ffffff; --surface-2:#ebebed;
+  --s-100:#040406; --s-200:#18191e; --s-300:#46474d;
+  --s-400:#60606c; --s-500:#9194a1;
+  --hairline:#d4d4d8; --hairline-soft:#e4e4e7; --hairline-strong:#c7c9d1;
+  --accent:#c53024; --accent-strong:#a8261c; --accent-10:rgba(220,59,40,.10);
+  --mint:#0d9488; --mint-10:rgba(20,184,166,.12);
+  --amber:#c2410c; --amber-10:rgba(234,88,12,.12);
+  --indigo:#4f46e5; --indigo-10:rgba(99,102,241,.14);
+  --lime:#4d7c0f; --lime-10:rgba(101,163,13,.14);
+  --ok:#059669; --warn:#d97706; --err:#dc2626; --info:#335cff;
+  --r-sm:0px; --r-md:2px; --r-card:14px; --r-pill:9999px;
+  --f-sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",'Noto Sans SC',sans-serif;
+  --f-mono:ui-monospace,"SF Mono",Menlo,Monaco,"Cascadia Mono","PingFang SC",monospace;
+  --sh-sm:0 1px 2px rgba(0,0,0,.04),0 1px 3px rgba(0,0,0,.04);
+  --sh-md:0 4px 12px rgba(0,0,0,.06),0 2px 4px rgba(0,0,0,.04);
+  --sh-lg:0 12px 32px rgba(0,0,0,.10),0 4px 12px rgba(0,0,0,.06);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{width:750px;background:var(--bg);font-family:var(--f-sans);color:var(--s-300);
+  -webkit-font-smoothing:antialiased;}
+.page{padding:48px 32px 32px;}
+
+/* ── header ── */
+.kicker{font-family:var(--f-mono);font-size:12px;font-weight:500;letter-spacing:.08em;
+  text-transform:uppercase;color:var(--s-400);}
+h1{font-size:40px;line-height:1.25;color:var(--s-100);font-weight:700;margin:12px 0 16px;}
+.lede{font-size:18px;line-height:1.7;color:var(--s-300);}
+.lede strong{color:var(--s-100);}
+.hero-rule{height:2px;background:var(--s-100);margin:32px 0;position:relative;}
+.hero-rule::after{content:"";position:absolute;left:0;top:0;width:64px;height:2px;background:var(--accent);}
+
+/* ── notice ── */
+.notice{background:var(--surface-1);border:1px solid var(--hairline);border-left:4px solid var(--accent);
+  border-radius:var(--r-md);padding:20px 24px;margin-bottom:48px;box-shadow:var(--sh-sm);}
+.notice .n-title{font-size:18px;font-weight:700;color:var(--s-100);margin-bottom:8px;}
+.notice p{font-size:15px;line-height:1.7;}
+.notice .url{font-family:var(--f-mono);font-size:15px;color:var(--s-100);font-weight:600;background:var(--surface-2);
+  padding:2px 8px;border-radius:var(--r-md);}
+
+/* ── step ── */
+.step{margin-bottom:48px;}
+.step-head{display:flex;align-items:baseline;gap:16px;margin-bottom:12px;}
+.step-no{font-family:var(--f-mono);font-size:13px;font-weight:700;letter-spacing:.08em;
+  color:#fff;background:var(--s-100);padding:6px 12px;border-radius:var(--r-md);flex:none;}
+.step h2{font-size:24px;color:var(--s-100);font-weight:700;line-height:1.35;}
+.step .desc{font-size:16px;line-height:1.75;margin-bottom:16px;}
+.step .desc strong{color:var(--s-100);}
+.step .desc .accent{color:var(--accent);font-weight:700;}
+
+/* screenshot frame */
+.shot{background:var(--surface-1);border:1px solid var(--hairline);border-radius:var(--r-card);
+  overflow:hidden;box-shadow:var(--sh-md);}
+.shot img{display:block;width:100%;height:auto;}
+.shot .cap{font-size:13px;color:var(--s-500);padding:10px 16px;border-top:1px solid var(--hairline-soft);
+  line-height:1.5;}
+.shot + .shot{margin-top:16px;}
+.shot.crop-top img{margin-top:-1px;}
+.crop{overflow:hidden;}
+
+/* label chips over layout explanation */
+.zones{display:flex;gap:8px;margin:16px 0 0;}
+.zone{flex:1;border-radius:var(--r-md);padding:12px;border:1px solid var(--hairline);background:var(--surface-1);}
+.zone .z-tag{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  font-weight:700;margin-bottom:6px;}
+.zone.z1 .z-tag{color:var(--mint);} .zone.z2 .z-tag{color:var(--indigo);} .zone.z3 .z-tag{color:var(--amber);}
+.zone p{font-size:13px;line-height:1.6;color:var(--s-400);}
+.zone p b{color:var(--s-200);}
+
+/* mini flow (text steps) */
+.flow{display:flex;flex-direction:column;gap:0;margin-top:8px;}
+.flow-item{display:flex;gap:16px;}
+.flow-rail{display:flex;flex-direction:column;align-items:center;flex:none;width:24px;}
+.flow-dot{width:10px;height:10px;border-radius:var(--r-pill);background:var(--accent);flex:none;margin-top:7px;}
+.flow-line{width:1px;flex:1;background:var(--hairline-strong);}
+.flow-item:last-child .flow-line{display:none;}
+.flow-body{padding-bottom:20px;font-size:16px;line-height:1.7;}
+.flow-body b{color:var(--s-100);}
+.flow-body .sub{font-size:14px;color:var(--s-400);line-height:1.65;margin-top:2px;}
+
+/* tips */
+.tips{background:var(--surface-1);border:1px solid var(--hairline);border-radius:var(--r-card);
+  padding:24px;box-shadow:var(--sh-sm);}
+.tips h3{font-size:18px;color:var(--s-100);margin-bottom:16px;}
+.tip{display:flex;gap:12px;font-size:15px;line-height:1.7;}
+.tip + .tip{margin-top:12px;}
+.tip .t-dot{flex:none;width:8px;height:8px;border-radius:var(--r-pill);background:var(--mint);margin-top:9px;}
+.tip b{color:var(--s-100);}
+
+/* footer */
+.footer{margin-top:48px;padding-top:24px;border-top:1px solid var(--hairline);
+  display:flex;justify-content:space-between;align-items:center;}
+.footer .brand{font-size:16px;font-weight:700;color:var(--s-100);}
+.footer .brand span{color:var(--accent);}
+.footer .meta{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--s-500);}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="kicker">BotLearn · 学员上手指南</div>
+  <h1>开学第一步：<br>3 分钟看懂怎么学这门课</h1>
+  <p class="lede">欢迎加入《<strong>AI 领导力：打造你的第一个 AI 员工</strong>》。这不是一门「看完就行」的视频课——你会带着一件真实工作，跟 Agent 一起把它做出来。开始前，花 3 分钟认识一下你的学习台。</p>
+
+  <div class="hero-rule"></div>
+
+  <div class="notice">
+    <div class="n-title">先说最重要的一条：请用电脑学习</div>
+    <p>在电脑浏览器打开 <span class="url">course.botlearn.com.cn</span>。课程采用 16:9 互动画布，<strong style="color:var(--s-100)">手机端暂不支持学习页</strong>——手机打开会提示你回到电脑，进度不会丢。</p>
+  </div>
+
+  <!-- STEP 1 -->
+  <div class="step">
+    <div class="step-head"><div class="step-no">STEP 1</div><h2>登录，兑换你的课程</h2></div>
+    <p class="desc">收到兑换码后，三步进课：</p>
+    <div class="flow">
+      <div class="flow-item"><div class="flow-rail"><div class="flow-dot"></div><div class="flow-line"></div></div>
+        <div class="flow-body"><b>手机号登录</b><div class="sub">电脑浏览器打开网址，点右上角「登录」，手机号 + 验证码即可，不用记密码。</div></div></div>
+      <div class="flow-item"><div class="flow-rail"><div class="flow-dot"></div><div class="flow-line"></div></div>
+        <div class="flow-body"><b>找到课程，点「兑换课程」</b><div class="sub">在课程页找到《AI 领导力：打造你的第一个 AI 员工》，输入小助手发你的兑换码。</div></div></div>
+      <div class="flow-item"><div class="flow-rail"><div class="flow-dot"></div><div class="flow-line"></div></div>
+        <div class="flow-body"><b>点「开始正式学习」</b><div class="sub">先看一段开场导学，之后第 1 节自动解锁。</div></div></div>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step">
+    <div class="step-head"><div class="step-no">STEP 2</div><h2>认识你的学习台：三个区域</h2></div>
+    <p class="desc">进入课程后，屏幕分三块，各管一件事：</p>
+    <div class="shot"><img src="assets/07-学习教练Atlas打开-desktop.png" alt="三栏学习界面"><div class="cap">课程学习界面：左侧目录 · 中间内容 · 右侧学习教练</div></div>
+    <div class="zones">
+      <div class="zone z1"><div class="z-tag">左 · 目录</div><p><b>你学到哪了。</b>10 节课按顺序解锁，绿点 = 已完成。</p></div>
+      <div class="zone z2"><div class="z-tag">中 · 内容</div><p><b>你正在学的。</b>课件 + 语音讲解，一页一个知识点。</p></div>
+      <div class="zone z3"><div class="z-tag">右 · Atlas 老师</div><p><b>随时可问的教练。</b>没听懂、不知道下一步，都问它。</p></div>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step">
+    <div class="step-head"><div class="step-no">STEP 3</div><h2>跟着讲解，一页一页往下走</h2></div>
+    <p class="desc">每一页都配了<strong>语音讲解和字幕</strong>，像老师在旁边带着你看。看完这页，点右下角<span class="accent">「下一步」</span>。课程按顺序解锁——<strong>后面的章节暂时是灰色的，不是坏了</strong>，学到了自然会打开。</p>
+    <div class="shot"><img src="assets/09-第1节正文页-语音讲解播放中-desktop.png" alt="正文页与语音讲解"><div class="cap">底部是语音讲解条：播放 / 进度 / 字幕开关；右下角「下一步」翻页</div></div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="step">
+    <div class="step-head"><div class="step-no">STEP 4</div><h2>重头戏：跟 Agent 做一次真交付</h2></div>
+    <p class="desc">每节课的「本课交付」环节，点<span class="accent">「去练习」</span>会进入练习工作台。这不是选择题测验——是一个练习 Agent 带着你，把<strong>你自己的真实工作</strong>往前推一步。右侧写着这次练习的目标和完成标准，跟着它的引导选择或输入就行。</p>
+    <div class="shot"><img src="assets/11-Agent任务工作台-开场引导-desktop.png" alt="Agent 练习工作台"><div class="cap">练习工作台：Agent 一步步引导，右侧面板写明「练习说明」和「完成标准」</div></div>
+    <div class="shot"><img src="assets/17-练习已通过弹窗-desktop.png" alt="练习已通过"><div class="cap">达到完成标准会看到「练习已通过」，结果自动保存</div></div>
+  </div>
+
+  <!-- STEP 5 -->
+  <div class="step">
+    <div class="step-head"><div class="step-no">STEP 5</div><h2>你的成果，都存在「文件」里</h2></div>
+    <p class="desc">练习做完，Agent 会把成果整理成文件——比如第 1 节的《差距诊断与项目立项卡》。点右上角<strong>「文件」</strong>随时查看、下载。整门课学完，这些文件会攒成你的第一个 AI 员工档案。</p>
+    <div class="shot"><img src="assets/16-立项卡文件预览-desktop.png" alt="立项卡文件预览"><div class="cap">第 1 节的产出：差距诊断与项目立项卡，可预览、可下载</div></div>
+  </div>
+
+  <!-- STEP 6 -->
+  <div class="step">
+    <div class="step-head"><div class="step-no">STEP 6</div><h2>卡住了？直接问 Atlas 老师</h2></div>
+    <p class="desc">右上角的<strong>Atlas 老师</strong>是你的专属学习教练：概念没听懂、忙不过来想调学习节奏、不确定下一步做什么，都可以问。它了解这门课的每一页。</p>
+    <div class="shot"><img src="assets/08-Atlas对话-学习节奏建议-desktop.png" alt="Atlas 老师对话"><div class="cap">真实对话：问「工作忙怎么安排」，Atlas 给出了两套具体的学习节奏</div></div>
+  </div>
+
+  <!-- tips -->
+  <div class="tips">
+    <h3>三件放心的事</h3>
+    <div class="tip"><div class="t-dot"></div><p><b>进度自动保存。</b>随时可以关掉页面，回来接着学，练习记录也都在。</p></div>
+    <div class="tip"><div class="t-dot"></div><p><b>提示「无法连接服务器」不用慌。</b>偶发网络抖动，刷新页面或点「刷新状态」重试即可。</p></div>
+    <div class="tip"><div class="t-dot"></div><p><b>每节课约 40 分钟。</b>建议「学完概念当天就做练习」，不攒课——这门课的方法，隔天就会衰减。</p></div>
+  </div>
+
+  <div class="footer">
+    <div class="brand">Bot<span>Learn</span> · 陪跑课程</div>
+    <div class="meta">course.botlearn.com.cn</div>
+  </div>
+
+</div>
+</body>
+</html>
